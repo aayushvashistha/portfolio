@@ -15,5 +15,5 @@ class resume(models.Model):
     designation = models.CharField(max_length=100)
     text = models.CharField(max_length=2000)
 
-    # def __str__(self):
-    #     return self.year
+    def __str__(self):
+        return self.year

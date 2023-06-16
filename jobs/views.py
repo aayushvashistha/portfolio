@@ -3,21 +3,22 @@ from .models import job, resume
 
 # Create your views here.
 def home(request):
-    jobs = job.objects
-    return render(request, 'home.html', {'jobs': jobs})
-
-# def detail(request, job_id):
-#     # print(job_id)
-#     job_detail = get_object_or_404(job, pk = job_id)
-#     return render(request, 'detail.html', {'job': job_detail})
-
-def work(request):
-    # work_details = job.objects.filter(id = 4)
-    jobs = job.objects
-    print(job, jobs)
-    return render(request, 'work.html', {'jobs': jobs})
+    return render(request, 'home.html')
 
 def detail(request, job_id):
-    resume_detail = get_object_or_404(resume, pk = job_id)
-    print(resume_detail, job_id)
-    return render(request, 'detail.html', {'resume': resume_detail})
+    # print(job_id)
+    job_detail = get_object_or_404(job, pk = job_id)
+    print(job_detail)
+    if job_id == 4:
+        resume_detail = resume.objects.filter(id__in = [1,2])
+        print(resume_detail)
+    elif job_id == 5:
+        resume_detail = resume.objects.filter(id__in = [3,4])
+        print(resume_detail)
+    else:
+        resume_detail = resume.objects.filter(id = 5)
+    return render(request, 'detail.html', {'job': job_detail, 'resume': resume_detail})
+
+def work(request):
+    jobs = job.objects
+    return render(request, 'work.html', {'jobs': jobs})
